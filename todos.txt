@@ -1,0 +1,6 @@
+dir(str)-check string methods
+help(str.methods)-documentation
+dir(list)-check list methods
+help(list.methods)-documentation
+dir(builtins)-check all built inshello
+hello
