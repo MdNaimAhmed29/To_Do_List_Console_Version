@@ -39,14 +39,20 @@ while True:
 
         case "complete":
 
+            number = int(input("Enter the number of the todo to complete: "))
+
             with open("todos.txt", "r") as file:
                 todos = file.readlines()
 
-            number = int(input("Enter the number of the todo to complete: "))
-            todos.pop(number - 1)
+            index = number - 1
+            todo_to_remove = todos[index].strip('\n')
+            todos.pop(index)
 
             with open("todos.txt", "w") as file:
                 file.writelines(todos)
+
+            message = f"Todo '{todo_to_remove}' removed from the list."
+            print(message)
 
         case "exit":
             break
