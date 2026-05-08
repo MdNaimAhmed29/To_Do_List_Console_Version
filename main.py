@@ -1,3 +1,12 @@
+#from functions import get_todos, write_todos
+import functions
+
+import time
+
+now = time.strftime("%Y-%m-%d %H:%M:%S")
+
+print(f"Welcome to the To-Do List App! Current time: {now}")
+
 while True:
     user_action = input("Add, Show, Edit, Complete, Exit: ")
     user_action = user_action.strip()
@@ -5,18 +14,15 @@ while True:
     if user_action.startswith('add'):
         todo = user_action[4:]
 
-        with open("todos.txt", "r") as file:
-            todos = file.readlines()
+        todos = functions.get_todos()
 
         todos.append(todo + '\n')
 
-        with open("todos.txt", "w") as file:
-            file.writelines(todos)
+        functions.write_todos(todos)
 
     elif user_action.startswith('show'):
 
-        with open("todos.txt", "r") as file:
-            todos = file.readlines()
+        todos = functions.get_todos()
 
         for index, item in enumerate(todos):
             item = item.strip('\n')
@@ -27,8 +33,7 @@ while True:
 
         try:
 
-            with open("todos.txt", "r") as file:
-                todos = file.readlines()
+            todos = functions.get_todos()
 
             number = int(user_action[5:])
             number -= 1
@@ -36,8 +41,7 @@ while True:
             new_todo = input("Enter new todo: ") + "\n"
             todos[number] = new_todo
 
-            with open("todos.txt", "w") as file:
-                file.writelines(todos)
+            functions.write_todos(todos)
 
         except ValueError:
             print("Invalid input. Please enter a valid number.")
@@ -49,15 +53,13 @@ while True:
 
             number = int(user_action[9:])
 
-            with open("todos.txt", "r") as file:
-                todos = file.readlines()
+            todos = functions.get_todos()
 
             index = number - 1
             todo_to_remove = todos[index].strip('\n')
             todos.pop(index)
 
-            with open("todos.txt", "w") as file:
-                file.writelines(todos)
+            functions.write_todos(todos)
 
             message = f"Todo '{todo_to_remove}' removed from the list."
             print(message)
